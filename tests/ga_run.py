@@ -1,4 +1,4 @@
-from ga.py import GradeGeneticAlgorithm
+from ga import GradeGeneticAlgorithm
 
 # ===== EXEMPLOS DE USO =====
 if __name__ == "__main__":

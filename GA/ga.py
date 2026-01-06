@@ -219,6 +219,9 @@ class GradeGeneticAlgorithm:
             if gen % 100 == 0:
                 print(f"Geração {gen}: Melhor fitness = {best_fitness_ever:.4f}")
 
+            
+            
+
         return best_ever, best_fitness_ever
 
     def display_results(self, solution):
@@ -277,3 +280,51 @@ class GradeGeneticAlgorithm:
 
 
 
+    def get_results_json(self,solution):
+        all_tests = self.current_tests + solution['tests']
+        all_assignments = self.current_assignments + solution['assignments']
+        
+        provas = []
+        for i, grade in enumerate(all_tests):
+            prova = {
+                "nota": round(grade, 2),
+                "peso": round(self.spec_test_weight[i], 2) if self.spec_test_weight else None
+            }
+            provas.append(prova)
+
+
+        trabalhos = []
+        for i, grade in enumerate(all_assignments):
+            trabalho = {
+                "nota": round(grade, 2),
+                "peso": round(self.spec_assignment_weight[i], 2) if self.spec_assignment_weight else None
+            }
+            trabalhos.append(trabalho)
+
+        final_avg = self.calculate_weighted_average(
+            all_tests,
+            all_assignments,
+            self.spec_test_weight,
+            self.spec_assignment_weight
+        )
+
+        diff = abs(final_avg - self.target_avg)
+
+        if diff <= 0.05:
+                message = "O algoritmo retornou uma combinação válida de notas"
+        elif diff <=0.2:
+                message = f"O algoritmo retornou uma solução próxima (diferença: {diff:.2f})"
+        else:
+                message = f"O algoritmo não conseguiu encontrar uma solução próxima (diferença: {diff:.2f})"
+        
+        response = {
+            "notas":{
+                "peso provas": round(self.test_weight,2),
+                "provas": provas,
+                "peso trabalhos": round(self.assignment_weight,2),
+                "trabalhos": trabalhos
+            },
+            "message": message
+        }
+        return response
+        

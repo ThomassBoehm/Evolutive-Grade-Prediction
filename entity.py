@@ -9,6 +9,7 @@ class Boletim:
     assignment_weight: float
     spec_test_weight: Optional[list[float]]
     spec_assignment_weight: Optional[list[float]]
+    response : dict
 
 
     def __init__(self, current_tests: list[float], current_assignments: list[float],

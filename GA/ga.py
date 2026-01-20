@@ -1,24 +1,36 @@
 import random
 import numpy as np
-
+from typing import Optional
 class GradeGeneticAlgorithm:
-    def __init__(self, current_tests, current_assignments,
-                 num_remaining_tests, num_remaining_assignments,
-                 test_weight, assignment_weight, target_average,
-                 spec_test_weight=None, spec_assignment_weight=None,
-                 max_grade=10.0, population_size=100, generations=500):
-        self.current_tests = current_tests
-        self.current_assignments = current_assignments
-        self.num_remaining_tests = num_remaining_tests
-        self.num_remaining_assignments = num_remaining_assignments
-        self.test_weight = test_weight
-        self.assignment_weight = assignment_weight
-        self.spec_test_weight = spec_test_weight
-        self.spec_assignment_weight = spec_assignment_weight
-        self.target_avg = target_average
-        self.max_grade = max_grade
-        self.pop_size = population_size
-        self.generations = generations
+
+    def __init__(
+        self,
+        current_tests: list[float],
+        current_assignments: list[float],
+        num_remaining_tests: int,
+        num_remaining_assignments: int,
+        test_weight: float,
+        assignment_weight: float,
+        target_average: float,
+        spec_test_weight: Optional[list[float]] = None,
+        spec_assignment_weight: Optional[list[float]] = None,
+        max_grade: float = 10.0,
+        population_size: int = 100,
+        generations: int = 500
+    ) -> None:
+
+        self.current_tests: list[float] = current_tests
+        self.current_assignments: list[float] = current_assignments
+        self.num_remaining_tests: int = num_remaining_tests
+        self.num_remaining_assignments: int = num_remaining_assignments
+        self.test_weight: float = test_weight
+        self.assignment_weight: float = assignment_weight
+        self.spec_test_weight: Optional[list[float]] = spec_test_weight
+        self.spec_assignment_weight: Optional[list[float]] = spec_assignment_weight
+        self.target_avg: float = target_average
+        self.max_grade: float = max_grade
+        self.pop_size: int = population_size
+        self.generations: int = generations
 
         # Validação de pesos gerais
         total_weight = test_weight + assignment_weight

@@ -52,6 +52,10 @@ if __name__ == "__main__":
 
     print("Executando Algoritmo Genético...")
     solution2, fitness2 = ga2.run()
+
+    print(solution2)
+    
     final2 = ga2.display_results(solution2)
     response2 = ga2.get_results_json(solution2)
     print(f"JSON Response: {response2}")
+    

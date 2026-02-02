@@ -1,4 +1,4 @@
-from  errors import EntityError
+from  helpers.errors import EntityError
 from typing import Optional
 class Boletim:
     current_tests: list[float] 
